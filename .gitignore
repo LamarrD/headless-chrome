@@ -1,0 +1,5 @@
+.terraform
+terraform.auto.tfvars
+backend.auto.tfvars
+lambda_function.zip
+venv
