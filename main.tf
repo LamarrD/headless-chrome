@@ -14,16 +14,17 @@ provider "aws" {
   region              = "us-east-1"
 }
 
+# Create bucket for lambda layers
 resource "aws_s3_bucket" "lambda_layer_bucket" {
   bucket = "lambda-layers-${var.account_id}"
 }
 
+# Create lambda layer
 resource "aws_s3_object" "lambda_layer_object" {
   bucket = aws_s3_bucket.lambda_layer_bucket.bucket
   key    = "layer-headless_chrome.zip"
   source = "layer-headless_chrome.zip"
 }
-
 resource "aws_lambda_layer_version" "lambda_layer" {
   layer_name          = "headless-chrome"
   s3_bucket           = aws_s3_bucket.lambda_layer_bucket.bucket
@@ -39,8 +40,8 @@ resource "aws_iam_role" "lambda_role" {
   })
 }
 
-resource "aws_lambda_function" "test_lambda" {
-  function_name    = "test_lambda"
+resource "aws_lambda_function" "selenium-test-lambda" {
+  function_name    = "selenium-test-lambda"
   timeout          = 30
   memory_size      = 256
   role             = aws_iam_role.lambda_role.arn

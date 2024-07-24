@@ -4,7 +4,6 @@
 
 Creates a headless chrome lambda layer to let me use selenium in my python lambda functions.
 
-```zip function.zip lambda_function.py```   
+```sh package.sh```   
 ```terraform init```   
 ```terraform apply```   
-
